@@ -215,8 +215,8 @@
 						<!-- search -->
 						<div class="col-10 agileits_search">
 							<form class="form-inline" action="#" method="post">
-								<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
-								<button class="btn my-2 my-sm-0" type="submit">Search</button>
+								<input class="form-control mr-sm-2" type="search" placeholder="Bạn muốn tìm những gì nào ?" aria-label="Search" required>
+								<button class="btn my-2 my-sm-0" type="submit">Tìm Kiếm</button>
 							</form>
 						</div>
 						<!-- //search -->
