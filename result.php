@@ -1,5 +1,17 @@
 <?php
-	include_once('model/connect.php')
+	include "config.php";
+	include "model/db.php";
+	include "model/Item.php";
+	$item = new Item();
+	$getAllItems = $item ->getAllItems();
+	if (isset($_GET['keyword'])) :
+		$keyword = $_GET['keyword'];
+		$count = 2;
+		$page = isset($_GET['page']) ? $_GET['page'] : 1;
+		$total = count($item->searchCount($keyword));
+		$url = $_SERVER['PHP_SELF']."?keyword=".$keyword;
+		$sreach = $item->search($keyword,$page,$count);
+	
 ?>
 <!--
 Author: W3layouts
@@ -174,47 +186,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 
 	<!-- header-bottom-->
-	<div class="header-bot">
-		<div class="container">
-			<div class="row header-bot_inner_wthreeinfo_header_mid">
-				<!-- logo -->
-				<div class="col-md-3 logo_agile">
-					<h1 class="text-center">
-						<a href="index.html" class="font-weight-bold font-italic">
-							<img src="images/logo2.png" alt=" " class="img-fluid">Electro Store
-						</a>
-					</h1>
-				</div>
-				<!-- //logo -->
-				<!-- header-bot -->
-				<div class="col-md-9 header mt-4 mb-md-0 mb-4">
-					<div class="row">
-						<!-- search -->
-						<div class="col-10 agileits_search">
-							<form class="form-inline" action="#" method="post">
-								<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
-								<button class="btn my-2 my-sm-0" type="submit">Search</button>
-							</form>
-						</div>
-						<!-- //search -->
-						<!-- cart details -->
-						<div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
-							<div class="wthreecartaits wthreecartaits2 cart cart box_1">
-								<form action="#" method="post" class="last">
-									<input type="hidden" name="cmd" value="_cart">
-									<input type="hidden" name="display" value="1">
-									<button class="btn w3view-cart" type="submit" name="submit" value="">
-										<i class="fas fa-cart-arrow-down"></i>
-									</button>
-								</form>
-							</div>
-						</div>
-						<!-- //cart details -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<!-- shop locator (popup) -->
 	<!-- //header-bottom -->
 	<!-- navigation -->
@@ -418,7 +390,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="ads-grid py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
-			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">	
+
 				<span>S</span>ản Phẩm</h3>
 			<!-- //tittle heading -->
 			<div class="row">
@@ -428,10 +401,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<!-- first section -->
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
 							<div class="row">
+								<?php 
+								$search = $item->search($keyword, $page, $count);
+								foreach($sreach as $value): ?>
 								<div class="col-md-4 product-men">
 									<div class="men-pro-item simpleCart_shelfItem">
 										<div class="men-thumb-item text-center">
-											<img src="images/m1.jpg" alt="">
+											<img src="images/<?php echo $value['sanpham_image']?>" alt="">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
 													<a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -440,11 +416,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
-												<a href="single.html">Samsung Galaxy J7</a>
+												<a href="single.html"><?php echo $value['sanpham_name']?></a>
 											</h4>
 											<div class="info-product-price my-2">
-												<span class="item_price">$200.00</span>
-												<del>$280.00</del>
+												<span class="item_price"><?php echo $value['sanpham_gia']?></span>
+												<del><?php echo $value['sanpham_giakhuyenmai']?></del>
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 												<form action="#" method="post">
@@ -466,88 +442,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4 product-men mt-md-0 mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="images/m2.jpg" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">OPPO A37f</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$230.00</span>
-												<del>$250.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="OPPO A37f" />
-														<input type="hidden" name="amount" value="230.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-md-0 mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="images/m3.jpg" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">Apple iPhone X</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$280.00</span>
-												<del>$300.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Apple iPhone X" />
-														<input type="hidden" name="amount" value="280.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
+								<?php endforeach?>
 							</div>
 						</div>
 						<!-- //first section -->
+						<ul class="pagination">
+                                    <?php echo $item-> paginate($url, $total, $count, $page) ?>
+                                </ul>
 				</div>
 			</div>
 		</div>
@@ -857,6 +758,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="js/bootstrap.js"></script>
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
+	 <?php
+	 endif
+	 ?>
 
 </body>
 
