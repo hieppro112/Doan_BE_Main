@@ -1,5 +1,5 @@
 <?php
-include_once "connect.php"
+include_once "model/connect.php"
 
 ?>
 
@@ -125,7 +125,7 @@ include_once "connect.php"
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="#" method="post">
+					<form action="kodattenlaIndex.php" method="post">
 						<div class="form-group">
 							<label class="col-form-label">Username</label>
 							<input type="text" class="form-control" placeholder=" " name="Name" required="">
@@ -204,7 +204,7 @@ include_once "connect.php"
 				<!-- logo -->
 				<div class="col-md-3 logo_agile">
 					<h1 class="text-center">
-						<a href="index.html" class="font-weight-bold font-italic">
+						<a href="kodattenlaindex.php" class="font-weight-bold font-italic">
 							<img src="images/logo2.png" alt=" " class="img-fluid">Electro Store
 						</a>
 					</h1>
@@ -268,7 +268,7 @@ include_once "connect.php"
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto text-center mr-xl-5">
 						<li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link" href="index.html">Trang Chủ
+							<a class="nav-link" href="kodattenlaindex.php">Trang Chủ
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
@@ -277,13 +277,13 @@ include_once "connect.php"
 								while($rowcategory= mysqli_fetch_array($sqlcategory)){
 						 ?>
 						<li class="nav-item  mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link " href="chitietsp.php?id=<?php echo $rowcategory['category_id']?>" role="button" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link " href="danhmuc.php?id=<?php echo $rowcategory['category_id']?>" role="button" aria-haspopup="true" aria-expanded="false">
 								<?php echo $rowcategory['category_name']?>
 							</a>
 							<?php }?>
 						</li>
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link" href="about.html">Liên  hệ</a>
+							<a class="nav-link" href="about.php">Liên  hệ</a>
 						</li>
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link" href="product.html">Tin tức</a>
@@ -378,7 +378,7 @@ include_once "connect.php"
 											<img src="images/<?php echo $row_sanpham['sanpham_image']?>" alt="">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Chi tiết sản phẩm</a>
+													<a href="single.php?id=<?php echo $row_sanpham['sanpham_id']?>" class="link-product-add-cart">Chi tiết sản phẩm</a>
 												</div>
 											</div>
 										</div>

@@ -1,5 +1,13 @@
 <?php
 class Item extends Db{
+
+    public function get_Category($id){
+        $sql = self::$connection->prepare("SELECT * from tbl_sanpham where category_id='$id'");
+        $sql->execute();
+        $item = array();
+        $item = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $item;
+    }
     public function getAllItems()
     {
         $sql = self::$connection->prepare("SELECT `sanpham_name`,`sanpham_gia`,`sanpham_giakhuyenmai`,`sanpham_active`,`sanpham_soluong`,`sanpham_image`

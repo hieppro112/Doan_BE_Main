@@ -1,18 +1,26 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <?php
-	include "config.php";
-	include "model/db.php";
-	include "model/Item.php";
-	include "model/connect.php"
+	include_once "model/connect.php"
 ?>
 <?php
-    $item = new Item();
-    $getAllItems = $item ->getAllItems();
+if(isset($_GET['id'])){
+	$id = $_GET['id'];
+}
+else{
+	$id ='';
+}
+	$sql_chitiet = mysqli_query($mysqli,"SELECT * from tbl_sanpham where sanpham_id='$id' ");
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-	<title>Electro Store Ecommerce Category Bootstrap Responsive Web Template | Electronics :: w3layouts</title>
+	<title>Electro Store Ecommerce Category Bootstrap Responsive Web Template | Single Product 1 :: w3layouts</title>
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
@@ -570,8 +578,8 @@
 					<div class="row">
 						<!-- search -->
 						<div class="col-10 agileits_search">
-							<form class="form-inline" action="result.php" method="get">
-								<input name="keyword" class="form-control mr-sm-2" type="search" placeholder="Bạn muốn tìm sản phẩm nào ? " aria-label="Search" required>
+							<form class="form-inline" action="#" method="post">
+								<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
 								<button class="btn my-2 my-sm-0" type="submit">Search</button>
 							</form>
 						</div>
@@ -597,22 +605,22 @@
 	<!-- shop locator (popup) -->
 	<!-- //header-bottom -->
 	<!-- navigation -->
-	<?php
-		$sqlcategory = mysqli_query($mysqli,'Select * from tbl_category order by category_id desc')
-	 ?>
 	<div class="navbar-inner">
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="agileits-navi_search">
 					<form action="#" method="post">
 						<select id="agileinfo-nav_search" name="agileinfo_search" class="border" required="">
-							<option value="">Danh Mục Sản Phẩm</option>
-							<?php
-								while($rowcategory = mysqli_fetch_array($sqlcategory)){
-							?>
-							
-							<option value="<?php echo $rowcategory['category_id'] ?>"><?php if($rowcategory!= null) echo $rowcategory['category_name'] ?></option>
-							<?php }?>
+							<option value="">All Categories</option>
+							<option value="Televisions">Televisions</option>
+							<option value="Headphones">Headphones</option>
+							<option value="Computers">Computers</option>
+							<option value="Appliances">Appliances</option>
+							<option value="Mobiles">Mobiles</option>
+							<option value="Fruits &amp; Vegetables">Tv &amp; Video</option>
+							<option value="iPad & Tablets">iPad & Tablets</option>
+							<option value="Cameras & Camcorders">Cameras & Camcorders</option>
+							<option value="Home Audio & Theater">Home Audio & Theater</option>
 						</select>
 					</form>
 				</div>
@@ -622,38 +630,176 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto text-center mr-xl-5">
-						<li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
-						<a class="nav-link" href="kodattenlaindex.php">Trang Chủ
+						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+							<a class="nav-link" href="index.html">Home
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
-						<?php 
-								$sqlcategory = mysqli_query($mysqli,'Select * from tbl_category order by category_id desc');
-								while($rowcategory= mysqli_fetch_array($sqlcategory)){
-						 ?>
-						<li class="nav-item  mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link " href="chitietsp.php?id=<?php echo $rowcategory['category_id']?>" role="button" aria-haspopup="true" aria-expanded="false">
-								<?php echo $rowcategory['category_name']?>
+						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Electronics
 							</a>
-							<?php }?>
-						</li>
-						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link" href="about.html">Liên  hệ</a>
-						</li>
-						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link" href="product.html">Tin tức</a>
+							<div class="dropdown-menu">
+								<div class="agile_inner_drop_nav_info p-4">
+									<h5 class="mb-3">Mobiles, Computers</h5>
+									<div class="row">
+										<div class="col-sm-6 multi-gd-img">
+											<ul class="multi-column-dropdown">
+												<li>
+													<a href="product.html">All Mobile Phones</a>
+												</li>
+												<li>
+													<a href="product.html">All Mobile Accessories</a>
+												</li>
+												<li>
+													<a href="product.html">Cases & Covers</a>
+												</li>
+												<li>
+													<a href="product.html">Screen Protectors</a>
+												</li>
+												<li>
+													<a href="product.html">Power Banks</a>
+												</li>
+												<li>
+													<a href="product.html">All Certified Refurbished</a>
+												</li>
+												<li>
+													<a href="product.html">Tablets</a>
+												</li>
+												<li>
+													<a href="product.html">Wearable Devices</a>
+												</li>
+												<li>
+													<a href="product.html">Smart Home</a>
+												</li>
+											</ul>
+										</div>
+										<div class="col-sm-6 multi-gd-img">
+											<ul class="multi-column-dropdown">
+												<li>
+													<a href="product.html">Laptops</a>
+												</li>
+												<li>
+													<a href="product.html">Drives & Storage</a>
+												</li>
+												<li>
+													<a href="product.html">Printers & Ink</a>
+												</li>
+												<li>
+													<a href="product.html">Networking Devices</a>
+												</li>
+												<li>
+													<a href="product.html">Computer Accessories</a>
+												</li>
+												<li>
+													<a href="product.html">Game Zone</a>
+												</li>
+												<li>
+													<a href="product.html">Software</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
 						</li>
 						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								More
+								Appliances
 							</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="product2.html">Sản phẩm mới</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="single.html">Kiểm tra hàng</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="checkout.html">Thanh Toán </a>
+								<div class="agile_inner_drop_nav_info p-4">
+									<h5 class="mb-3">TV, Appliances, Electronics</h5>
+									<div class="row">
+										<div class="col-sm-6 multi-gd-img">
+											<ul class="multi-column-dropdown">
+												<li>
+													<a href="product2.html">Televisions</a>
+												</li>
+												<li>
+													<a href="product2.html">Home Entertainment Systems</a>
+												</li>
+												<li>
+													<a href="product2.html">Headphones</a>
+												</li>
+												<li>
+													<a href="product2.html">Speakers</a>
+												</li>
+												<li>
+													<a href="product2.html">MP3, Media Players & Accessories</a>
+												</li>
+												<li>
+													<a href="product2.html">Audio & Video Accessories</a>
+												</li>
+												<li>
+													<a href="product2.html">Cameras</a>
+												</li>
+												<li>
+													<a href="product2.html">DSLR Cameras</a>
+												</li>
+												<li>
+													<a href="product2.html">Camera Accessories</a>
+												</li>
+											</ul>
+										</div>
+										<div class="col-sm-6 multi-gd-img">
+											<ul class="multi-column-dropdown">
+												<li>
+													<a href="product2.html">Musical Instruments</a>
+												</li>
+												<li>
+													<a href="product2.html">Gaming Consoles</a>
+												</li>
+												<li>
+													<a href="product2.html">All Electronics</a>
+												</li>
+												<li>
+													<a href="product2.html">Air Conditioners</a>
+												</li>
+												<li>
+													<a href="product2.html">Refrigerators</a>
+												</li>
+												<li>
+													<a href="product2.html">Washing Machines</a>
+												</li>
+												<li>
+													<a href="product2.html">Kitchen & Home Appliances</a>
+												</li>
+												<li>
+													<a href="product2.html">Heating & Cooling Appliances</a>
+												</li>
+												<li>
+													<a href="product2.html">All Appliances</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
 							</div>
+						</li>
+						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+							<a class="nav-link" href="about.html">About Us</a>
+						</li>
+						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+							<a class="nav-link" href="product.html">New Arrivals</a>
+						</li>
+						<li class="nav-item dropdown active mr-lg-2 mb-lg-0 mb-2">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Pages
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="product.html">Product 1</a>
+								<a class="dropdown-item" href="product2.html">Product 2</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item active" href="single.html">Single Product 1</a>
+								<a class="dropdown-item" href="single2.html">Single Product 2</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="checkout.html">Checkout Page</a>
+								<a class="dropdown-item" href="payment.html">Payment Page</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="contact.html">Contact Us</a>
 						</li>
 					</ul>
 				</div>
@@ -676,225 +822,101 @@
 						<a href="index.html">Home</a>
 						<i>|</i>
 					</li>
-					<li>Electronics</li>
+					<li>Single Product 1</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<!-- //page -->
 
-	<!-- top Products -->
-	<div class="ads-grid py-sm-5 py-4">
+	<!-- Single Page -->
+	 <?php 
+	 	while($row_chitiet= mysqli_fetch_array($sql_chitiet)){
+	 ?>
+	<div class="banner-bootom-w3-agileits py-5">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>S</span>ản Phẩm</h3>
+				<span>C</span>hi 
+				<span>T</span>iết
+				<span>S</span>ản
+				<span>P</span>hẩm</h3>
 			<!-- //tittle heading -->
 			<div class="row">
-				<!-- product left -->
-				<div class="agileinfo-ads-display col-lg-9">
-					<div class="wrapper">
-						<!-- first section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<div class="row">
-								<?php 
-									$getAllItems = $item->getNewItem(0,3);
-									foreach($getAllItems as $value) :?>
-								<div class="col-md-4 product-men">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="images/<?php echo $value['sanpham_image']?>" alt="" >
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html"><?php echo $value['sanpham_name']?></a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price"><?php echo $value['sanpham_gia']?></span>
-												<del><?php echo $value['sanpham_giakhuyenmai']?></del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Samsung Galaxy J7" />
-														<input type="hidden" name="amount" value="200.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<?php endforeach ?>
-							</div>
+				<div class="col-lg-5 col-md-8 single-right-left ">
+					<div class="grid images_3_of_2">
+						<div class="flexslider">
+							<ul class="slides">
+								<li data-thumb="images/si1.jpg">
+									<div class="thumb-image">
+										<img src="./images/<?php echo $row_chitiet['sanpham_image'] ?>" data-imagezoom="true" class="img-fluid" alt=""> </div>
+								</li>
+								
+							</ul>
+							<div class="clearfix"></div>
 						</div>
-						<!-- //first section -->
-						<!-- second section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<div class="row">
-							<?php 
-									$getAllItems = $item->getNewItem(3,3);
-									foreach($getAllItems as $value) :?>
-								<div class="col-md-4 product-men">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="images/<?php echo $value['sanpham_image']?>" alt="" >
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html"><?php echo $value['sanpham_name']?></a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price"><?php echo $value['sanpham_gia']?></span>
-												<del><?php echo $value['sanpham_giakhuyenmai']?></del>
-											</div>
-											<span class="product-new-top">New</span>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Infinix Hot S3" />
-														<input type="hidden" name="amount" value="300.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<?php endforeach ?>
-							</div>
-						</div>
-						<!-- //second section -->
-						<!-- 3rd section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<div class="row">
-							<?php 
-									$getAllItems = $item->getNewItem(6,3);
-									foreach($getAllItems as $value) :?>
-								<div class="col-md-4 product-men">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="images/<?php echo $value['sanpham_image']?>" alt="" width="250px" height="300px">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html"><?php echo $value['sanpham_name']?></a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price"><?php echo $value['sanpham_gia']?></span>
-												<del><?php echo $value['sanpham_giakhuyenmai']?></del>
-											</div>
-											<span class="product-new-top">New</span>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Infinix Hot S3" />
-														<input type="hidden" name="amount" value="300.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<?php endforeach ?>
-							</div>
-						</div>
-						<!-- //3rd section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<div class="row">
-							<?php 
-									$getAllItems = $item->getNewItem(9,3);
-									foreach($getAllItems as $value) :?>
-								<div class="col-md-4 product-men">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="images/<?php echo $value['sanpham_image']?>" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html"><?php echo $value['sanpham_name']?></a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price"><?php echo $value['sanpham_gia']?></span>
-												<del><?php echo $value['sanpham_giakhuyenmai']?></del>
-											</div>
-											<span class="product-new-top">New</span>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Infinix Hot S3" />
-														<input type="hidden" name="amount" value="300.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<?php endforeach ?>
-							</div>
-						</div>
-						<!-- //fourth section -->
 					</div>
 				</div>
-				<!-- //product left -->
+
+				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
+					<h3 class="mb-3"><?php echo $row_chitiet['sanpham_name'] ?></h3>
+					<p class="mb-3">
+						<span class="item_price"><?php echo $row_chitiet['sanpham_giakhuyenmai'] ?></span>
+						<del class="mx-2 font-weight-light"><?php echo $row_chitiet['sanpham_gia'] ?></del>
+						<label>Free delivery</label>
+					</p>
+					<div class="single-infoagile">
+						<ul>
+							<li class="mb-3">
+								Cash on Delivery Eligible.
+							</li>
+							<li class="mb-3">
+								Shipping Speed to Delivery.
+							</li>
+							<li class="mb-3">
+								EMIs from $655/month.
+							</li>
+							<li class="mb-3">
+								Bank OfferExtra 5% off* with Axis Bank Buzz Credit CardT&C
+							</li>
+						</ul>
+					</div>
+					<div class="product-single-w3l">
+						<p class="my-3">
+							<i class="far fa-hand-point-right mr-2"></i>
+							<label>1 Year</label>Manufacturer Warranty</p>
+						<p>
+						<?php echo $row_chitiet['sanpham_mota'] ?>
+						</p>
+						<p class="my-sm-4 my-3">
+							<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
+						</p>
+					</div>
+					<div class="occasion-cart">
+						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+							<form action="#" method="post">
+								<fieldset>
+									<input type="hidden" name="cmd" value="_cart" />
+									<input type="hidden" name="add" value="1" />
+									<input type="hidden" name="business" value=" " />
+									<input type="hidden" name="item_name" value="Samsung Galaxy J7 Prime" />
+									<input type="hidden" name="amount" value="200.00" />
+									<input type="hidden" name="discount_amount" value="1.00" />
+									<input type="hidden" name="currency_code" value="USD" />
+									<input type="hidden" name="return" value=" " />
+									<input type="hidden" name="cancel_return" value=" " />
+									<input type="submit" name="submit" value="Add to cart" class="button" />
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<!-- //top products -->
+		<?php 
+	}?>
+	<!-- //Single Page -->
 
 	<!-- middle section -->
 	<div class="join-w3l1 py-sm-5 py-4">
@@ -1098,250 +1120,7 @@
 		<!-- //footer third section -->
 
 		<!-- footer fourth section -->
-		<div class="agile-sometext py-md-5 py-sm-4 py-3">
-			<div class="container">
-				<!-- brands -->
-				<div class="sub-some">
-					<h5 class="font-weight-bold mb-2">Mobile & Tablets :</h5>
-					<ul>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Android Phones</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Smartphones</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Feature Phones</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Unboxed Phones</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Refurbished Phones</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2"> Tablets</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">CDMA Phones</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Value Added Services</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Sell Old</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Used Mobiles</a>
-						</li>
-					</ul>
-				</div>
-				<div class="sub-some mt-4">
-					<h5 class="font-weight-bold mb-2">Computers :</h5>
-					<ul>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Laptops </a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Printers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Routers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Ink & Toner Cartridges</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Monitors</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Video Games</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Unboxed & Refurbished Laptops</a>
-						</li>
-						<li>
-							<a href="product.html" class="border-right pr-2">Assembled Desktops</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Data Cards</a>
-						</li>
-					</ul>
-				</div>
-				<div class="sub-some mt-4">
-					<h5 class="font-weight-bold mb-2">TV, Audio & Large Appliances :</h5>
-					<ul>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">TVs & DTH</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Home Theatre Systems</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Hidden Cameras & CCTVs</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Refrigerators</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Washing Machines</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2"> Air Conditioners</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Cameras</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Speakers</a>
-						</li>
-					</ul>
-				</div>
-				<div class="sub-some mt-4">
-					<h5 class="font-weight-bold mb-2">Mobile & Laptop Accessories :</h5>
-					<ul>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Headphones</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Power Banks </a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Backpacks</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Mobile Cases & Covers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Pen Drives</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">External Hard Disks</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2"> Mouse</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Smart Watches & Fitness Bands</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">MicroSD Cards</a>
-						</li>
-					</ul>
-				</div>
-				<div class="sub-some mt-4">
-					<h5 class="font-weight-bold mb-2">Appliances :</h5>
-					<ul>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Trimmers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Hair Dryers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Emergency Lights</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Water Purifiers </a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Electric Kettles</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Hair Straighteners</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Induction Cooktops</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Sewing Machines</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2"> Geysers</a>
-						</li>
-					</ul>
-				</div>
-				<div class="sub-some mt-4">
-					<h5 class="font-weight-bold mb-2">Popular on Electro Store</h5>
-					<ul>
-						<li class="m-sm-1">
-							<a href="product.html" class="border-right pr-2">Offers & Coupons</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Couple Watches</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Gas Stoves</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2"> Air Coolers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Air Purifiers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Headphones</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2"> Headsets</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Pressure Cookers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Sandwich Makers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Air Friers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Irons</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">LED TV</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Sandwich Makers</a>
-						</li>
-					</ul>
-				</div>
-				<!-- //brands -->
-				<!-- payment -->
-				<div class="sub-some child-momu mt-4">
-					<h5 class="font-weight-bold mb-3">Payment Method</h5>
-					<ul>
-						<li>
-							<img src="images/pay2.png" alt="">
-						</li>
-						<li>
-							<img src="images/pay5.png" alt="">
-						</li>
-						<li>
-							<img src="images/pay1.png" alt="">
-						</li>
-						<li>
-							<img src="images/pay4.png" alt="">
-						</li>
-						<li>
-							<img src="images/pay6.png" alt="">
-						</li>
-						<li>
-							<img src="images/pay3.png" alt="">
-						</li>
-						<li>
-							<img src="images/pay7.png" alt="">
-						</li>
-						<li>
-							<img src="images/pay8.png" alt="">
-						</li>
-						<li>
-							<img src="images/pay9.png" alt="">
-						</li>
-					</ul>
-				</div>
-				<!-- //payment -->
-			</div>
-		</div>
+
 		<!-- //footer fourth section (text) -->
 	</footer>
 	<!-- //footer -->
@@ -1439,6 +1218,25 @@
 		}
 	</script>
 	<!-- //password-script -->
+
+	<!-- imagezoom -->
+	<script src="js/imagezoom.js"></script>
+	<!-- //imagezoom -->
+
+	<!-- flexslider -->
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+
+	<script src="js/jquery.flexslider.js"></script>
+	<script>
+		// Can also be used with $(document).ready()
+		$(window).load(function () {
+			$('.flexslider').flexslider({
+				animation: "slide",
+				controlNav: "thumbnails"
+			});
+		});
+	</script>
+	<!-- //FlexSlider-->
 
 	<!-- smoothscroll -->
 	<script src="js/SmoothScroll.min.js"></script>
